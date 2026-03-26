@@ -32,4 +32,30 @@ public class Service : IService
         return "Add Category Successfully";
     }
 
+    public async Task<List<Response.CategoryResponse>> GetCategories()
+    {
+        var query = _dbContext.Categories.Where(x => true);
+        query = query.OrderBy(x => x.Name);
+        var selected = query.Select(x => new Response.CategoryResponse()
+        {
+            Id = x.Id,
+            Name = x.Name
+        });
+        var result = await selected.ToListAsync();
+        return result;
+    }
+
+    public async Task<List<Response.CategoryResponse>> GetCategoryByChildId(Guid parentId)
+    {
+        var query = _dbContext.Categories.Where(x => x.ParentId == parentId);
+        query = query.OrderBy(x => x.Name);
+        var selected = query.Select(x => new Response.CategoryResponse()
+        {
+            Id = x.Id,
+            Name = x.Name
+        });
+        var result = await selected.ToListAsync();
+        return result;
+    }
+    
 }
