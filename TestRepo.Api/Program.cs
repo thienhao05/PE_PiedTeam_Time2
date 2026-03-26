@@ -3,6 +3,7 @@ using TestRepo.Api.Extensions;
 using TestRepo.Api.Middlewares;
 using TetPee.Repository;
 using JwtService = TetPee.Service.JwtService;
+using CategoryService = TetPee.Service.Category;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,7 @@ builder.Services.AddJwtServices(builder.Configuration);
 builder.Services.AddSwaggerServices();
 
 builder.Services.AddScoped<JwtService.IService, JwtService.Service>();
+builder.Services.AddScoped<CategoryService.IService, CategoryService.Service>();
 
 builder.Services.AddTransient<GlobalExceptionHandlerMiddleware>();
 

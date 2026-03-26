@@ -6,7 +6,7 @@ public class Category : BaseEntity<Guid>, IAuditableEntity
 {
     public required string Name { get; set; }
     
-    public Guid ParentId { get; set; }
+    public Guid? ParentId { get; set; }
     public Category Parent { get; set; }
     
     public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
